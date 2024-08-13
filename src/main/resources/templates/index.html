@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <meta charset="UTF-8">
+  <th:block th:replace="~{common::linkBootstrap}">
+  </th:block>
+</head>
+<body>
+<nav th:replace="~{common::navbar}">
+
+</nav>
+<div class="container">
+<!--  <p style="color: blue" th:text="${message}"></p>-->
+  <button class="btn btn-primary mt-4" onclick="window.location.href='/home/create'">Thêm</button>
+  <form th:action="@{/home/search}" class="form-control-lg row d-flex align-items-center justify-content-end">
+    <div class="col-md-6 ml-auto">
+      <input type="text" placeholder="Tên khách hàng" name="userName" style="width: 60%;float: right">
+    </div>
+    <div class="col-md-4">
+
+<!--      <select id="serviceType" name="categoryName" class="form-control">-->
+<!--        <option value="">Chọn loại dịch vụ</option>-->
+<!--        <option th:each="category : ${category}"-->
+<!--                th:text="${category.name}"-->
+<!--                th:value="${category.name}">-->
+
+<!--        </option>-->
+
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-info col-md-2" style="float: right;">Tìm kiếm</button>
+  </form>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Số thứ tự</th>
+      <th>Mã đơn hàng </th>
+      <th>Tên sản phẩm </th>
+      <th>Giá(USD)</th>
+      <th>Loại sản phẩm</th>
+      <th>Ngày mua</th>
+      <th>Số lượng </th>
+      <th>Tổng tiền</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order, iterStat: ${orders}">
+      <td th:text="${iterStat.count}"></td>
+      <td th:text="${order.id}"></td>
+      <td th:text="${order.product.name}"></td>
+      <td th:text="${order.product.price}"></td>
+      <td th:text="${order.product.category.name}"></td>
+      <td th:text="${order.day}"></td>
+      <td th:text="${order.quantity}"></td>
+      <td th:text="${order.getTotalPrice()}"></td>
+
+      <td><button class="btn btn-danger"
+                  th:onclick="'window.location.href = \'' + @{/home/{id}/edit(id=${order.id})} + '\''">Sửa</button></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!--    <nav aria-label="Page navigation example">-->
+  <!--        <ul class="pagination">-->
+  <!--            <li class="page-item" th:if="${students.hasPrevious()}">-->
+  <!--                <a class="page-link" th:href="@{/student(page=${students.number - 1}, nameStudent=${nameStudent})}" aria-label="Previous">-->
+  <!--                    <span aria-hidden="true">&laquo;</span>-->
+
+  <!--                </a>-->
+  <!--            </li>-->
+  <!--            <li class="page-item" th:if="${students.hasNext()}">-->
+  <!--                <a class="page-link" th:href="@{/student(page=${students.number + 1}, nameStudent=${nameStudent})}" aria-label="Next">-->
+  <!--                    <span aria-hidden="true">&raquo;</span>-->
+  <!--                </a>-->
+  <!--            </li>-->
+  <!--        </ul>-->
+  <!--    </nav>-->
+</div>
+</body>
+
+</html>
