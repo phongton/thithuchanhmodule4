@@ -8,6 +8,7 @@ import com.codegym.thi_thuc_hanh_module4.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -28,5 +29,10 @@ public class OrderService implements IOrderService {
     @Override
     public Order save(Order order) {
         return orderRepository.save(order);
+    }
+
+    @Override
+    public List<Order> findAllByDay(LocalDate startDate, LocalDate endDate) {
+        return orderRepository.findOrdersByPurchaseDateBetween(startDate,endDate);
     }
 }

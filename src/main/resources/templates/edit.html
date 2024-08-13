@@ -13,27 +13,29 @@
         <input type="hidden" th:field="*{id}"/>
         <div class="mb-3">
             <label class="form-label" for="classroom">Loại sản phẩm</label>
-            <select th:field="*{product.category.name}" class="form-select" id="classroom">
-                <option th:each="category: ${category}" th:text="${category.name}" th:value="${category.id}"></option>
+            <select th:field="*{product.category.id}" class="form-select" id="classroom" required>
+                <option th:each="category: ${category}" th:text="${category.name}" th:value="${category.id}" ></option>
             </select>
 <!--            <p th:if="${#fields.hasErrors('category')}" th:errors="*{category.name}" style="color: red; font-style: italic"></p>-->
         </div>
         <div class="mb-3">
-            <label class="form-label" for="classroom">Loại Bất Động Sản</label>
-            <select th:field="*{product.name}" class="form-select" id="product">
+            <label class="form-label" for="classroom"> Sản phẩm</label>
+            <select th:field="*{product.id}" class="form-select" id="product" required>
                 <option th:each="product: ${products}" th:text="${product.name}" th:value="${product.id}"></option>
             </select>
             <!--            <p th:if="${#fields.hasErrors('category')}" th:errors="*{category.name}" style="color: red; font-style: italic"></p>-->
         </div>
         <div>
             <label for="content">Số lượng</label>
-            <input type="text" id="content" th:field="*{quantity}"/>
+            <input type="text" id="content" th:field="*{quantity}" required />
+            <p th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" style="color: red; font-style: italic"></p>
+
         </div>
 
         <div class="mb-3">
             <label class="form-label" for="day">Ngày mua</label>
-            <input type="date" class="form-control" id="day" th:field="*{day}"/>
-<!--            <p th:if="${#fields.hasErrors('day')}" th:errors="*{day}" style="color: red; font-style: italic"></p>-->
+            <input type="date" class="form-control" id="day" th:field="*{day}" required/>
+            <p th:if="${#fields.hasErrors('day')}" th:errors="*{day}" style="color: red; font-style: italic"></p>
         </div>
         <input type="submit" value="Edit"/>
     </form>
